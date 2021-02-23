@@ -69,12 +69,14 @@ class TestFormatLinks(unittest.TestCase):
                          "  - **[attrib](<attrib.md>):** string\n "
                          " - **[attrib](<attrib.md>):** string")
 
+
 def _extract_links(string) -> List[str]:
     return [m.group(1) for m in extract_links(string)]
 
 
 class TestExtractLinks(unittest.TestCase):
     """Test that we correctly extract the links, for backreference"""
+
     def test_empty(self):
         self.assertEqual(_extract_links(""), [])
 

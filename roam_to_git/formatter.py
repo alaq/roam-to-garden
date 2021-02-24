@@ -138,9 +138,11 @@ def format_to_do(contents: str):
     contents = re.sub(r"{{\[\[DONE\]\]}} *", r"- [x] ", contents)
     return contents
 
+
 def remove_bullets(contents: str):
     contents = re.sub(r"^- *", r"", contents)
     return contents
+
 
 def extract_links(string: str) -> List[Match]:
     out = list(re.finditer(r"\[\[" r"([^\]\n]+)" r"\]\]", string)) + list(

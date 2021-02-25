@@ -16,13 +16,13 @@ class TestFormatTodo(unittest.TestCase):
         self.assertEqual(format_to_do("string"), "string")
 
     def test_to_do(self):
-        self.assertEqual(format_to_do("a\n- {{[[TODO]]}}string"), "a\n- [ ] string")
+        self.assertEqual(format_to_do("a\n{{[[TODO]]}}string"), "a\n- [ ] string")
 
     def test_done(self):
-        self.assertEqual(format_to_do("a\n- {{[[DONE]]}}string"), "a\n- [x] string")
+        self.assertEqual(format_to_do("a\n{{[[DONE]]}}string"), "a\n- [x] string")
 
     def test_something_else(self):
-        self.assertEqual(format_to_do("a\n- {{[[ZZZ]]}}string"), "a\n- {{[[ZZZ]]}}string")
+        self.assertEqual(format_to_do("a\n{{[[ZZZ]]}}string"), "a\n{{[[ZZZ]]}}string")
 
 
 class TestFormatLinks(unittest.TestCase):

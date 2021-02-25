@@ -121,6 +121,7 @@ def format_markdown_notes(
                 )
 
                 # Format content. Backlinks content will be formatted automatically.
+                content = remove_bullets(content)
                 content = format_to_do(content)
                 content = process_hyperlinks(content)
                 link_prefix = "../" * sum("/" in char for char in file_name)
@@ -133,8 +134,14 @@ def format_markdown_notes(
 
 
 def format_to_do(contents: str):
-    contents = re.sub(r"{{\[\[TODO\]\]}} *", r"[ ] ", contents)
-    contents = re.sub(r"{{\[\[DONE\]\]}} *", r"[x] ", contents)
+    contents = re.sub(r"{{\[\[TODO\]\]}} *", r"- [ ] ", contents)
+    contents = re.sub(r"{{\[\[DONE\]\]}} *", r"- [x] ", contents)
+    return contents
+
+
+def remove_bullets(contents: str):
+    contents = re.sub(r"^\s+", r"", contents, flags=re.M)  # flatten
+    contents = re.sub(r"^-\s", r"", contents, flags=re.M)  # remove bullets
     return contents
 
 

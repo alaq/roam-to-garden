@@ -140,7 +140,8 @@ def format_to_do(contents: str):
 
 
 def remove_bullets(contents: str):
-    contents = re.sub(r"^- *", r"", contents)
+    contents = re.sub(r"^\s+", r"", contents, flags=re.M) # flatten
+    contents = re.sub(r"^-\s", r"", contents, flags=re.M) # remove bullets
     return contents
 
 

@@ -141,7 +141,7 @@ def format_to_do(contents: str):
 
 def remove_bullets(contents: str):
     contents = re.sub(r"^\s+", r"", contents, flags=re.M)  # flatten
-    contents = re.sub(r"^-\s", r"", contents, flags=re.M)  # remove bullets
+    contents = re.sub(r"^-\s", r"\n", contents, flags=re.M)  # remove bullets and add line for correct markdown formatting
     return contents
 
 

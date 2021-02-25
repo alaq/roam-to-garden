@@ -67,7 +67,6 @@ def format_markdown(contents: Dict[str, str]) -> Dict[str, str]:
         content = add_back_links(content, back_links[file_name])
 
         # Format content. Backlinks content will be formatted automatically.
-        content = remove_bullets(content)
         content = format_to_do(content)
         link_prefix = "../" * sum("/" in char for char in file_name)
         content = format_link(content, link_prefix=link_prefix)
@@ -122,6 +121,7 @@ def format_markdown_notes(
                 )
 
                 # Format content. Backlinks content will be formatted automatically.
+                content = remove_bullets(content)
                 content = format_to_do(content)
                 content = process_hyperlinks(content)
                 link_prefix = "../" * sum("/" in char for char in file_name)

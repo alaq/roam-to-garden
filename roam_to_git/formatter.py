@@ -103,19 +103,12 @@ def process_hyperlinks(content):
 def format_markdown_notes(
     contents: Dict[str, str], notes_dir: Path, allowed_notes: List[str]
 ) -> Dict[str, str]:
-    back_links = get_back_links(contents)
     # Format and write the markdown files
     out = {}
     for file_name, content in contents.items():
         for file_name in (file_name, os.path.basename(file_name)):
             if file_name[:-3] in allowed_notes:
-                # We add the backlinks first, because they use the position of the caracters
-                # of the regex matchs
-                content = add_back_links_notes(
-                    content, notes_dir, file_name, back_links[file_name]
-                )
-
-                # Format content. Backlinks content will be formatted automatically.
+                # Format content.
                 content = remove_bullets(content)
                 content = format_to_do(content)
                 content = process_hyperlinks(content)

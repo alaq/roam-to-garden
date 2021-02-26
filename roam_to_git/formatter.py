@@ -109,13 +109,10 @@ def format_markdown_notes(
     for file_name, content in contents.items():
         for file_name in (file_name, os.path.basename(file_name)):
             if file_name[:-3] in allowed_notes:
-                # We add the backlinks first, because they use the position of the caracters
-                # of the regex matchs
                 content = add_back_links_notes(
                     content, notes_dir, file_name, back_links[file_name]
                 )
-
-                # Format content. Backlinks content will be formatted automatically.
+                # Format content.
                 content = remove_bullets(content)
                 content = format_to_do(content)
                 content = process_hyperlinks(content)
@@ -226,9 +223,8 @@ def add_back_links_notes(
                     else:
                         extended_context.append(line)
         new_lines.extend(["".join(extended_context), ""])
-    backlinks_str = "\n".join(new_lines)
     content = fix_triple_backticks(content)
-    return f"---\ntitle: {file_name[:-3]}\n---\n\n{content}\n{backlinks_str}\n"
+    return f"---\ntitle: {file_name[:-3]}\n---\n\n{content}\n"
 
 
 def convert_links(line: str):

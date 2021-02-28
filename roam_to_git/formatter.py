@@ -140,16 +140,16 @@ def format_to_do(contents: str):
 
 
 def remove_bullets(contents: str):
-  is_in_code_blocks = False
-  lines = contents.splitlines();
-  for i, line in enumerate(contents.splitlines()):
-    if line.startswith("```"):
-      is_in_code_blocks = not is_in_code_blocks
-    if not is_in_code_blocks:
-      line = re.sub(r"^\s+", r"", line)
-      line = re.sub(r"^-\s", r"\n", line)
-      lines[i] = line
-  return "\n".join(lines)
+    is_in_code_blocks = False
+    lines = contents.splitlines();
+    for i, line in enumerate(contents.splitlines()):
+        if line.startswith("```"):
+            is_in_code_blocks = not is_in_code_blocks
+        if not is_in_code_blocks:
+            line = re.sub(r"^\s+", r"", line)
+            line = re.sub(r"^-\s", r"\n", line)
+        lines[i] = line
+    return "\n".join(lines)
 
 
 def extract_links(string: str) -> List[Match]:
